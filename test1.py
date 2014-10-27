@@ -50,7 +50,7 @@ df['bg'] = df.label.apply(lambda x:True if x == bgLabel else False)
 bg = df[df.bg]
 for i in range(len(bg)):
     row = bg.irow(i)
-    pixels[int(row.x),int(row.y)] = (255,255,255)
+    pixels[int(row.x),int(row.y)] = (255,0,0)
 plt.imshow(image)
 
 
