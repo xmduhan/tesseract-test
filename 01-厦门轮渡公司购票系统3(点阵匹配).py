@@ -140,7 +140,7 @@ def readCharFromImage(image):
     image 需要读取的Image对象    
     '''
     curImageArray = imageToArray(image)
-    matchRate = {}
+    matchdata=[]
     for char,array in imageArrayMap.items():
         cnt = 0
         match = 0
@@ -150,9 +150,9 @@ def readCharFromImage(image):
                    cnt += 1                 
                    if curImageArray[x,y] == 1:
                        match += 1    
-        matchRate[char] = match/cnt
-    df = pd.DataFrame(matchRate.items(),columns=['char','rate'])
-    return df.sort('rate',ascending=False).irow(0).char
+        matchdata.append([char,match/cnt,cnt])
+    df = pd.DataFrame(matchdata,columns=['char','rate','cnt'])
+    return df.sort(['rate','cnt'],ascending=False).irow(0).char
 
 
 #%% 读取图像文件
