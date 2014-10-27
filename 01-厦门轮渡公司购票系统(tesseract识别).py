@@ -87,7 +87,7 @@ def splitImage(image):
 
 
 
-def cleanNoise(image,bgColor=(255,255,255),minPixels=60):
+def cleanNoise(image,bgColor=(255,255,255),minPixels=65):
     '''
     对前景色进行聚类剔除干扰符
     image   要处理的Image对象
@@ -152,7 +152,6 @@ cleanBackGround(image)
 smallImageList = splitImage(image)
 newImage = Image.new( 'RGB', (80,20), "black")
 newPixels = newImage.load()
-#%%
 for i,smallImage in enumerate(smallImageList):
     cleanNoise(smallImage)
     smallPixels = smallImage.load()
@@ -166,5 +165,5 @@ plt.imshow(newImage)
 code = ''.join([readCharFromImage(im) for im in smallImageList])
 code
 
-
 #%%
+
