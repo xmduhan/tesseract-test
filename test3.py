@@ -53,3 +53,6 @@ for i in range(len(noise.index)):
 
 #%%
 plt.imshow(image)
+
+#%%
+image = Image.open('d:\\1.jpg')

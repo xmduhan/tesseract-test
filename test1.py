@@ -70,7 +70,7 @@ fg['label'] = estimator.predict(fg)
 
 
 #%% 尝试擦去其中一个分类看看能否正常识别
-codeRange = string.letters + string.digits
+codeRange = string.uppercase + string.digits
 
 def readCode():
     for labelToErase in range(5):        
