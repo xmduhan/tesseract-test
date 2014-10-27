@@ -150,9 +150,17 @@ cleanBackGround(image)
 #%% 去噪处理
 # 将图片切分后去噪声，降低聚类算法出错几率 
 smallImageList = splitImage(image)
-for im in smallImageList:
-    cleanNoise(im)
+newImage = Image.new( 'RGB', (80,20), "black")
+newPixels = newImage.load()
+#%%
+for i,smallImage in enumerate(smallImageList):
+    cleanNoise(smallImage)
+    smallPixels = smallImage.load()
+    for x in range(20):
+        for y in range(20):
+           newPixels[i*20 + x,y] = smallPixels[x,y]
 
+plt.imshow(newImage)
 
 #%% 读取每个切片中的字符，然后进行合并
 code = ''.join([readCharFromImage(im) for im in smallImageList])
@@ -160,5 +168,3 @@ code
 
 
 #%%
-
-
