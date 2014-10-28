@@ -152,7 +152,9 @@ def readCharFromImage(image):
                        match += 1    
         matchdata.append([char,match/cnt,cnt])
     df = pd.DataFrame(matchdata,columns=['char','rate','cnt'])
-    return df.sort(['rate','cnt'],ascending=False).irow(0).char
+    # 由于背景处理可能会造成前景色的部分损耗，所以匹配率不一定是100%
+    # 所以设定规则:匹配率在95%以上，取匹配点数最多的数据。
+    return df[df.rate>.95].sort('cnt',ascending=False).irow(0).char
 
 
 #%% 读取图像文件
@@ -169,4 +171,7 @@ code = ''
 for im in smallImageList:
     code += readCharFromImage(im)
 code
+
+#%%
+
 
