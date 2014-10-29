@@ -156,22 +156,25 @@ def readCharFromImage(image):
     # 所以设定规则:匹配率在95%以上，取匹配点数最多的数据。
     return df[df.rate>.95].sort('cnt',ascending=False).irow(0).char
 
+def readCodeFromImage(image):
+    '''
+    图像文件读取验证码全文(4个字符)
+    image 需要读取的Image对象 
+    '''
+    # 处理背景
+    cleanBackGround(image)
+    # 切割文字
+    smallImageList = splitImage(image)
+    # 读取验证码
+    code = ''
+    for im in smallImageList:
+        code += readCharFromImage(im)
+    return code
+
 
 #%% 读取图像文件
 image = Image.open(srcImageFile)
 plt.imshow(image)
 
 #%% 获取验证码
-# 处理背景
-cleanBackGround(image)
-# 切割文字
-smallImageList = splitImage(image)
-# 读取验证码
-code = ''
-for im in smallImageList:
-    code += readCharFromImage(im)
-code
-
-#%%
-
-
+print readCodeFromImage(image)
